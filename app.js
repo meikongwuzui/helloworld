@@ -1,5 +1,6 @@
 var express=require('express');
 var app=express();
+var indexrouter=require('src/index');
 
 var options={
     dotfiles: 'ignore',
@@ -15,13 +16,7 @@ var options={
 
 app.use(express.static('src',options));
 
-app.post('/',function(req,res){
-    res.send("Hello Post");
-});
-
-app.get('/',function(req,res){
-    res.send("Hello");
-});
+app.use('/',indexrouter);
 
 app.listen(80,function(){
     console.log("app is listen on 80");
