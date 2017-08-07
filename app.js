@@ -1,7 +1,14 @@
 var express=require('express');
 var app=express();
 
-app.get('/',function(req,res){
-    
-})
+app.post('/',function(req,res){
+    res.send("Hello Post");
+});
 
+app.get('/',function(req,res){
+    res.send("Hello");
+});
+
+app.listen(80,function(){
+    console.log("app is listen on 80");
+});
