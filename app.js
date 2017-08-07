@@ -1,6 +1,6 @@
 var express=require('express');
 var app=express();
-var indexrouter=require('src/index');
+var indexrouter=require('./routes/index');
 
 var options={
     dotfiles: 'ignore',
