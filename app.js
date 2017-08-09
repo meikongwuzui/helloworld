@@ -3,7 +3,7 @@ var app=express();
 var indexrouter=require('./routes/index');
 
 var webSocketServer=require('ws').Server;
-var wss =new webSocketServer({port:5001});
+var wss =new webSocketServer({port:80});
 wss.on('connection',function(ws){
     console.log('client connected');
     ws.on('message',function(message){
@@ -27,6 +27,6 @@ app.use(express.static('src',options));
 
 app.use('/',indexrouter);
 
-app.listen(80,function(){
-    console.log("app is listen on 80");
-});
+// app.listen(80,function(){
+//     console.log("app is listen on 80");
+// });
