@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>WebSocket</title>
+    </head>
+    <body>
+        <input type="text" id="txtValue">
+        <input type="button" id="btnsend" value="Send">
+        <input type="button" id="btnclose" value="Closed">
+    </body>
+    <script>
+        
+        var ws=new WebSocket('ws://coolwan.cc:5001');
+
+        ws.binaryType="blob";
+        //ws.binaryType="arraybuffer";
+
+        ws.onopen=function(){
+            console.log(ws.protocol);
+        };
+
+        ws.onmessage=function(e){
+            if(typeof e.data==="string"){
+                console.log("string message received",e);
+            }
+            else if(e.data instanceof Blob){
+                console.log("blob message received");
+                var blobdata=new Blob(e.data);
+            }
+            else if(e.data instanceof ArrayBuffer)
+            {
+                console.log("ArrayBuffer message received");
+                var arraybuffer=new Uint8Array(e.data);
+            }
+            else{
+                console.log("other message received",e);
+            }
+        };
+
+        ws.onerror=function(e){
+        console.log("Wesocket Error:",e);
+        };
+
+        ws.onclose=function(e){
+            console.log("Wesocket Closed:",e);
+        }
+
+        document.getElementById('btnsend').onclick=function(){
+            if(ws instanceof WebSocket){
+                if(ws.readyState===WebSocket.OPEN){
+                    ws.send(document.getElementById('txtValue').value);
+                }else{
+                    alert('ws is closed');
+                }
+            }else{
+                alert('ws is not defind');
+            }
+        }
+
+        document.getElementById('btnclose').onclick=function(){
+            ws.close();
+        }
+
+    </script>
+</html>

@@ -2,6 +2,15 @@ var express=require('express');
 var app=express();
 var indexrouter=require('./routes/index');
 
+var webSocketServer=require('ws');
+var wss =new webSocketServer({port:5001});
+wss.on('connection',function(ws){
+    console.log('client connected');
+    ws.on('message',function(message){
+        console.log(message);
+    });
+});
+
 var options={
     dotfiles: 'ignore',
     etag: false,
