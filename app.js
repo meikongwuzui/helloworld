@@ -3,7 +3,7 @@ var app=express();
 var indexrouter=require('./routes/index');
 
 var webSocketServer=require('ws').Server;
-var wss =new webSocketServer({port:80});
+var wss =new webSocketServer({port:60701});
 wss.on('connection',function(ws){
     console.log('client connected');
     ws.on('message',function(message){
